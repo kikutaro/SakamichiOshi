@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sakamichi Oshi</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <select v-model="selectedmember.group">
+                <option v-for="grp in getGroups()">{{grp}}</option>
+            </select>
+            <select v-model="selectedmember.name">
+                <option v-for="name in selectGroup(selectedmember)">{{name}}</option>
+            </select>
+            <input type="number" v-model="selectedmember.oshi" />
+            <button v-on:click="addOshi">推し</button>
+        </div>
+        <ul>
+            <li v-for="oshimember in oshimembers">
+                <div v-show="oshimember.edit == false" @dblclick = "oshimember.edit = true">{{oshimember.group}}：{{oshimember.name}}:{{oshimember.oshi}}</div>
+                <div v-show="oshimember.edit == true" >
+                    <select v-on:ValueChange="selectGroup(oshimember)" v-model="oshimember.group">
+                        <option v-for="grp in getGroups()">{{grp}}</option>
+                    </select>
+                    <select v-model="oshimember.name">
+                        <option v-for="name in selectGroup(oshimember)">{{name}}</option>
+                    </select>
+                    <input type="number" v-model="oshimember.oshi" />
+                    <!-- ref https://jsfiddle.net/jpeter06/ppyeo1tg/ -->
+                    <button v-on:click="oshimember.edit=false; $emit('update')">推し</button>
+                    <button v-on:click="deleteOshi(oshimember); oshimember.edit=false; $emit('update')">削除</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
