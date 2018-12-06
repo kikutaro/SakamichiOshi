@@ -1,3 +1,5 @@
+Vue.use(VeeValidate, { locale: 'ja' })
+
 var app = new Vue({
   el: '#app',
   data: {
@@ -29,8 +31,8 @@ var app = new Vue({
         '丹生 明里','濱岸 ひより','松田 好花','宮田 愛萌','渡邉 美穂'
       ]
     },
-    selectedmember: { group: '', name: '', oshi: 0, edit: false},
-    editmember: { group: '', name: '', oshi: 0, edit: false},
+    selectedmember: { id: '', group: null, name: '', oshi: 0, edit: false},
+    editmember: { id: '', group: '', name: '', oshi: 0, edit: false},
     oshi: 0,
     oshimembers: []
   },
@@ -43,6 +45,7 @@ var app = new Vue({
     },
     addOshi() {
       this.oshimembers.push({
+        id: this.oshimembers.length,
         group: this.selectedmember.group,
         name: this.selectedmember.name,
         oshi: this.selectedmember.oshi,
