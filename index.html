@@ -13,7 +13,7 @@
             <select v-model="selectedmember.name">
                 <option v-for="name in selectGroup(selectedmember)">{{name}}</option>
             </select>
-            <input name="推しパーセント" type="number" v-model="selectedmember.oshi" v-validate="{ min_value : 1, max_value : 100}" />
+            <input name="推しパーセント" type="number" v-model="selectedmember.oshi" v-validate="{ min_value : 1, max_value : oshiMax(selectedmember.oshi) }" />
             <button v-on:click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid">推し</button>
              <span>{{ errors.first('推しパーセント') }}</span>
         </div>

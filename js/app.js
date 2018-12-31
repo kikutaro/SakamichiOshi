@@ -33,10 +33,15 @@ var app = new Vue({
     },
     selectedmember: { id: '', group: null, name: '', oshi: 0, edit: false},
     editmember: { id: '', group: '', name: '', oshi: 0, edit: false},
-    oshi: 0,
     oshimembers: []
   },
   methods: {
+    initSelected() {
+      this.selectedmember.group = ''
+      this.selectedmember.name = ''
+      this.selectedmember.oshi = ''
+      this.selectedmember.edit = false
+    },
     getGroups() {
       return Object.keys(this.sakamichimembers)
     },
@@ -51,9 +56,18 @@ var app = new Vue({
         oshi: this.selectedmember.oshi,
         edit: this.selectedmember.edit
        })
+       this.initSelected()
     },
     deleteOshi(member) {
       this.oshimembers = this.oshimembers.filter(o => o.name !== member.name)
+    },
+    oshiMax(value) {
+      return 100 - +this.oshitotal
+    }
+  },
+  computed: {
+    oshitotal() {
+      return this.oshimembers.reduce(function(acc,cur) { return acc + +cur.oshi } ,0)
     }
   }
 })
