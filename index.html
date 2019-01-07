@@ -2,29 +2,39 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
     <title>Sakamichi Oshi</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="ui container">
         <div>
-            <select name="グループ" v-model="selectedGroup" @click="onChangeGroup">
+            <select name="グループ" v-model="selectedGroup" @click="onChangeGroup" class="ui dropdown">
                 <option v-for="grp in getGroups()">{{grp}}</option>
             </select>
-            <select name="推しメン" v-model="selectedmember">
+            <select name="推しメン" v-model="selectedmember" class="ui dropdown">
                 <option v-for="member in getMembers" :value="member">{{member.name}}</option>
             </select>
+            <div class="ui input">
             <input name="推しパーセント" type="number" v-model="oshi" v-validate="{ min_value : 1, max_value : oshiMax(oshi) }" />
-            <button @click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid">推し</button>
+            </div>
+            <button @click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid" class="ui purple basic button">推し</button>
             <span>{{ errors.first('推しパーセント') }}</span>
         </div>
-        <ul>
-            <li v-for="oshimember in oshimembers" v-bind:key="oshimember.no">
-                <div>
-                    <label>{{oshimember.group}} {{oshimember.name}} {{oshimember.oshi}}</label>
-                    <button v-on:click="deleteOshi(oshimember); $emit('update')">削除</button>
+        <div class="ui five stackable cards">
+            <div class="card" v-for="oshimember in oshimembers" v-bind:key="oshimember.no">
+                <div class="content">
+                    <div class="header">{{oshimember.name}}</div>
+                    <div class="description">{{oshimember.group}}</div>
                 </div>
-            </li>
-        </ul>
+                <div class="image">
+                    <img />
+                </div>
+                <div class="content">
+                    <i class="heart icon"></i>{{oshimember.oshi}} 推し
+                </div>
+                <div v-on:click="deleteOshi(oshimember); $emit('update')" class="ui bottom attached button">削除</div>
+            </div>
+        </div>
     </div>
     <link rel="stylesheet" href="css/semantic.min.css">
     <script src="js/jquery-3.3.1.min.js"></script>
