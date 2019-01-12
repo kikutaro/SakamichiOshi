@@ -1,3 +1,7 @@
 body > .ui.container {
     margin-top: 3em;
 }
+
+.icon-heart-color {
+    color: #E74C3C;
+}

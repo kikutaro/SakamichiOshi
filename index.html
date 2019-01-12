@@ -17,14 +17,14 @@
             <div class="ui input">
             <input name="推しパーセント" type="number" v-model="oshi" v-validate="{ min_value : 1, max_value : oshiMax(oshi) }" />
             </div>
-            <button @click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid" class="ui purple basic button">推し</button>
+            <button @click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid" class="ui purple button">推す</button>
             <span>{{ errors.first('推しパーセント') }}</span>
         </div>
         <h4 class="ui horizontal divider header">
             <i class="hand point down outline icon"></i>
             推しメン
         </h4>
-        <div class="ui five stackable cards">
+        <div class="ui five stackable centered cards">
             <div class="card" v-for="oshimember in oshimembers" v-bind:key="oshimember.no">
                 <div class="content">
                     <div class="header">{{oshimember.name}}</div>
@@ -34,9 +34,9 @@
                     <img v-bind:src="oshimember.img" />
                 </div>
                 <div class="content">
-                    <i class="heart icon"></i>{{oshimember.oshi}} 推し
+                    <i class="heart icon icon-heart-color"></i>{{oshimember.oshi}} 推し
                 </div>
-                <div v-on:click="deleteOshi(oshimember); $emit('update')" class="ui bottom attached button">削除</div>
+                <div v-on:click="deleteOshi(oshimember); $emit('update')" class="ui bottom attached button" v-bind:class="oshimember.group === '乃木坂46' ? 'purple' : 'green' ">外す</div>
             </div>
         </div>
     </div>
