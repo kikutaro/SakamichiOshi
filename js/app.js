@@ -127,7 +127,7 @@ var app = new Vue({
       ]
     },
     selectedGroup: '乃木坂46',
-    oshi: 0,
+    oshi: 10,
     oshitotal: 0,
     selectedmember: {},
     oshimembers: []
@@ -147,7 +147,7 @@ var app = new Vue({
       }
       idx = (this.sakamichimembers[this.selectedGroup]).findIndex(obj => obj.selected == false)
       this.selectedmember = this.sakamichimembers[this.selectedGroup][idx]
-      this.oshi = 1
+      this.oshi = 10
     },
     deleteOshi(member) {
       idx = (this.sakamichimembers[member.group]).findIndex(obj => obj.name === member.name)

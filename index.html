@@ -15,7 +15,7 @@
                 <option v-for="member in getMembers" :value="member">{{member.name}}</option>
             </select>
             <div class="ui input">
-            <input name="推しパーセント" type="number" v-model="oshi" v-validate="{ min_value : 1, max_value : oshiMax(oshi) }" />
+            <input name="推しパーセント" type="number" step="10" v-model="oshi" v-validate="{ min_value : 1, max_value : oshiMax(oshi) }" />
             </div>
             <button @click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid" class="ui purple button">推す</button>
             <span>{{ errors.first('推しパーセント') }}</span>
