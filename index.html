@@ -6,7 +6,7 @@
     <title>Sakamichi Oshi</title>
 </head>
 <body>
-    <div id="app" class="ui container">
+    <div id="app" class="ui center aligned container">
         <div>
             <select name="グループ" v-model="selectedGroup" @click="onChangeGroup" class="ui dropdown">
                 <option v-for="grp in getGroups()">{{grp}}</option>
@@ -20,6 +20,10 @@
             <button @click="addOshi" :disabled="fields.推しパーセント && fields.推しパーセント.invalid" class="ui purple basic button">推し</button>
             <span>{{ errors.first('推しパーセント') }}</span>
         </div>
+        <h4 class="ui horizontal divider header">
+            <i class="hand point down outline icon"></i>
+            推しメン
+        </h4>
         <div class="ui five stackable cards">
             <div class="card" v-for="oshimember in oshimembers" v-bind:key="oshimember.no">
                 <div class="content">
@@ -27,7 +31,7 @@
                     <div class="description">{{oshimember.group}}</div>
                 </div>
                 <div class="image">
-                    <img />
+                    <img v-bind:src="oshimember.img" />
                 </div>
                 <div class="content">
                     <i class="heart icon"></i>{{oshimember.oshi}} 推し
@@ -37,6 +41,7 @@
         </div>
     </div>
     <link rel="stylesheet" href="css/semantic.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/semantic.min.js"></script>
     <script src="js/validation/vee-validate.min.js"></script>
